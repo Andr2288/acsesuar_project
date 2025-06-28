@@ -14,8 +14,8 @@ export const useOrderStore = create((set, get) => ({
             const res = await axiosInstance.get("/orders/my");
             set({ orders: res.data });
         } catch (error) {
-            toast.error("Failed to fetch orders");
-            console.error("Error fetching orders:", error);
+            toast.error("Не вдалося завантажити замовлення");
+            console.error("Помилка завантаження замовлень:", error);
         } finally {
             set({ isLoading: false });
         }
@@ -27,8 +27,8 @@ export const useOrderStore = create((set, get) => ({
             const res = await axiosInstance.get(`/orders/${id}`);
             set({ selectedOrder: res.data });
         } catch (error) {
-            toast.error("Failed to fetch order");
-            console.error("Error fetching order:", error);
+            toast.error("Не вдалося завантажити замовлення");
+            console.error("Помилка завантаження замовлення:", error);
         } finally {
             set({ isLoading: false });
         }
@@ -38,18 +38,18 @@ export const useOrderStore = create((set, get) => ({
         set({ isCreating: true });
         try {
             const res = await axiosInstance.post("/orders");
-            toast.success("Order created successfully!");
-            get().fetchOrders(); // Refresh orders list
+            toast.success("Замовлення створено успішно!");
+            get().fetchOrders(); // Оновлюємо список замовлень
             return res.data.orderId;
         } catch (error) {
-            toast.error(error.response?.data?.message || "Failed to create order");
+            toast.error(error.response?.data?.message || "Не вдалося створити замовлення");
             return null;
         } finally {
             set({ isCreating: false });
         }
     },
 
-    // Updated for simple payment processing (no Stripe)
+    // Оновлено для простої обробки платежів (без Stripe)
     createCheckoutSession: async (orderId) => {
         try {
             const res = await axiosInstance.post("/pay/create-checkout-session", {
@@ -57,14 +57,14 @@ export const useOrderStore = create((set, get) => ({
             });
 
             if (res.data.success) {
-                toast.success("Payment processed successfully!");
-                get().fetchOrders(); // Refresh orders
+                toast.success("Оплата пройшла успішно!");
+                get().fetchOrders(); // Оновлюємо замовлення
                 return true;
             }
 
             return false;
         } catch (error) {
-            toast.error("Failed to process payment");
+            toast.error("Не вдалося обробити оплату");
             return false;
         }
     },

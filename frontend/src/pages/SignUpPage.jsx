@@ -20,19 +20,19 @@ const SignUpPage = () => {
         const newErrors = {};
 
         if (!formData.login.trim()) {
-            newErrors.login = "Username is required";
+            newErrors.login = "Ім'я користувача є обов'язковим";
         } else if (formData.login.length < 3) {
-            newErrors.login = "Username must be at least 3 characters";
+            newErrors.login = "Ім'я користувача має містити принаймні 3 символи";
         }
 
         if (!formData.password) {
-            newErrors.password = "Password is required";
+            newErrors.password = "Пароль є обов'язковим";
         } else if (formData.password.length < 6) {
-            newErrors.password = "Password must be at least 6 characters";
+            newErrors.password = "Пароль має містити принаймні 6 символів";
         }
 
         if (formData.password !== formData.confirmPassword) {
-            newErrors.confirmPassword = "Passwords do not match";
+            newErrors.confirmPassword = "Паролі не співпадають";
         }
 
         setErrors(newErrors);
@@ -60,7 +60,7 @@ const SignUpPage = () => {
         const { name, value } = e.target;
         setFormData({ ...formData, [name]: value });
 
-        // Clear error when user starts typing
+        // Очищаємо помилку, коли користувач починає вводити
         if (errors[name]) {
             setErrors({ ...errors, [name]: "" });
         }
@@ -71,14 +71,14 @@ const SignUpPage = () => {
             <div className="card w-full max-w-md shadow-xl bg-base-100">
                 <div className="card-body">
                     <h2 className="card-title text-2xl font-bold text-center mb-6">
-                        Create Account
+                        Створити акаунт
                     </h2>
 
                     <form onSubmit={handleSubmit} className="space-y-4">
-                        {/* Username Input */}
+                        {/* Поле імені користувача */}
                         <div className="form-control">
                             <label className="label">
-                                <span className="label-text">Username</span>
+                                <span className="label-text">Ім'я користувача</span>
                             </label>
                             <div className="relative">
                                 <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
@@ -87,7 +87,7 @@ const SignUpPage = () => {
                                 <input
                                     type="text"
                                     name="login"
-                                    placeholder="Choose a username"
+                                    placeholder="Оберіть ім'я користувача"
                                     className={`input input-bordered w-full pl-10 ${
                                         errors.login ? "input-error" : ""
                                     }`}
@@ -102,10 +102,10 @@ const SignUpPage = () => {
                             )}
                         </div>
 
-                        {/* Password Input */}
+                        {/* Поле пароля */}
                         <div className="form-control">
                             <label className="label">
-                                <span className="label-text">Password</span>
+                                <span className="label-text">Пароль</span>
                             </label>
                             <div className="relative">
                                 <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
@@ -114,7 +114,7 @@ const SignUpPage = () => {
                                 <input
                                     type={showPassword ? "text" : "password"}
                                     name="password"
-                                    placeholder="Create a password"
+                                    placeholder="Створіть пароль"
                                     className={`input input-bordered w-full pl-10 pr-10 ${
                                         errors.password ? "input-error" : ""
                                     }`}
@@ -140,10 +140,10 @@ const SignUpPage = () => {
                             )}
                         </div>
 
-                        {/* Confirm Password Input */}
+                        {/* Поле підтвердження пароля */}
                         <div className="form-control">
                             <label className="label">
-                                <span className="label-text">Confirm Password</span>
+                                <span className="label-text">Підтвердження пароля</span>
                             </label>
                             <div className="relative">
                                 <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
@@ -152,7 +152,7 @@ const SignUpPage = () => {
                                 <input
                                     type={showConfirmPassword ? "text" : "password"}
                                     name="confirmPassword"
-                                    placeholder="Confirm your password"
+                                    placeholder="Підтвердіть ваш пароль"
                                     className={`input input-bordered w-full pl-10 pr-10 ${
                                         errors.confirmPassword ? "input-error" : ""
                                     }`}
@@ -187,19 +187,19 @@ const SignUpPage = () => {
                                 {isSigningUp ? (
                                     <span className="loading loading-spinner loading-sm"></span>
                                 ) : (
-                                    "Sign Up"
+                                    "Зареєструватися"
                                 )}
                             </button>
                         </div>
                     </form>
 
-                    <div className="divider">OR</div>
+                    <div className="divider">АБО</div>
 
                     <div className="text-center">
                         <p className="text-sm">
-                            Already have an account?{" "}
+                            Вже маєте акаунт?{" "}
                             <Link to="/login" className="link link-primary">
-                                Login here
+                                Увійдіть тут
                             </Link>
                         </p>
                     </div>

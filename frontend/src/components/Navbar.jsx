@@ -33,12 +33,12 @@ const Navbar = () => {
 
             <div className="navbar-center hidden lg:flex">
                 <ul className="menu menu-horizontal px-1">
-                    <li><Link to="/">Home</Link></li>
+                    <li><Link to="/">Головна</Link></li>
                     {authUser && (
-                        <li><Link to="/orders">My Orders</Link></li>
+                        <li><Link to="/orders">Мої замовлення</Link></li>
                     )}
                     {authUser && authUser.role === 'admin' && (
-                        <li><Link to="/admin">Admin Panel</Link></li>
+                        <li><Link to="/admin">Панель адміна</Link></li>
                     )}
                 </ul>
             </div>
@@ -46,7 +46,7 @@ const Navbar = () => {
             <div className="navbar-end">
                 {authUser ? (
                     <>
-                        {/* Cart */}
+                        {/* Кошик */}
                         <Link to="/cart" className="btn btn-ghost btn-circle">
                             <div className="indicator">
                                 <ShoppingCart className="w-5 h-5" />
@@ -58,7 +58,7 @@ const Navbar = () => {
                             </div>
                         </Link>
 
-                        {/* User Dropdown */}
+                        {/* Меню користувача */}
                         <div className="dropdown dropdown-end">
                             <div tabIndex={0} role="button" className="btn btn-ghost btn-circle avatar">
                                 <User className="w-5 h-5" />
@@ -66,18 +66,18 @@ const Navbar = () => {
                             <ul tabIndex={0} className="menu menu-sm dropdown-content bg-base-100 rounded-box z-[1] mt-3 w-52 p-2 shadow">
                                 <li>
                                     <Link to="/profile" className="justify-between">
-                                        Profile
+                                        Профіль
                                         <span className="badge">{authUser.login}</span>
                                     </Link>
                                 </li>
-                                <li><Link to="/orders">My Orders</Link></li>
+                                <li><Link to="/orders">Мої замовлення</Link></li>
                                 {authUser.role === 'admin' && (
-                                    <li><Link to="/admin">Admin Panel</Link></li>
+                                    <li><Link to="/admin">Панель адміна</Link></li>
                                 )}
                                 <li>
                                     <button onClick={handleLogout}>
                                         <LogOut className="w-4 h-4" />
-                                        Logout
+                                        Вийти
                                     </button>
                                 </li>
                             </ul>
@@ -86,10 +86,10 @@ const Navbar = () => {
                 ) : (
                     <>
                         <Link to="/login" className="btn btn-ghost">
-                            Login
+                            Увійти
                         </Link>
                         <Link to="/signup" className="btn btn-primary">
-                            Sign Up
+                            Реєстрація
                         </Link>
                     </>
                 )}

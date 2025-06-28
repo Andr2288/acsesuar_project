@@ -16,7 +16,7 @@ const OrdersPage = () => {
     };
 
     const formatDate = (dateString) => {
-        return new Date(dateString).toLocaleDateString('en-US', {
+        return new Date(dateString).toLocaleDateString('uk-UA', {
             year: 'numeric',
             month: 'long',
             day: 'numeric',
@@ -28,11 +28,11 @@ const OrdersPage = () => {
     const getStatusBadge = (status) => {
         switch (status) {
             case 'paid':
-                return <div className="badge badge-success">Paid</div>;
+                return <div className="badge badge-success">Оплачено</div>;
             case 'pending':
-                return <div className="badge badge-warning">Pending</div>;
+                return <div className="badge badge-warning">Очікується</div>;
             case 'failed':
-                return <div className="badge badge-error">Failed</div>;
+                return <div className="badge badge-error">Помилка</div>;
             default:
                 return <div className="badge badge-ghost">{status}</div>;
         }
@@ -58,34 +58,34 @@ const OrdersPage = () => {
                     >
                         <ArrowLeft className="w-4 h-4" />
                     </button>
-                    <h1 className="text-3xl font-bold">Order Details</h1>
+                    <h1 className="text-3xl font-bold">Деталі замовлення</h1>
                 </div>
 
                 <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-                    {/* Order Info */}
+                    {/* Інформація про замовлення */}
                     <div className="lg:col-span-1">
                         <div className="card bg-base-100 shadow-lg">
                             <div className="card-body">
                                 <h2 className="card-title">
                                     <Package className="w-5 h-5" />
-                                    Order #{selectedOrder.order.id}
+                                    Замовлення #{selectedOrder.order.id}
                                 </h2>
 
                                 <div className="space-y-3">
                                     <div className="flex justify-between">
-                                        <span className="text-gray-600">Status:</span>
+                                        <span className="text-gray-600">Статус:</span>
                                         {getStatusBadge(selectedOrder.order.paymentStatus)}
                                     </div>
 
                                     <div className="flex justify-between">
-                                        <span className="text-gray-600">Date:</span>
+                                        <span className="text-gray-600">Дата:</span>
                                         <span className="text-sm">
                                             {formatDate(selectedOrder.order.createdAt)}
                                         </span>
                                     </div>
 
                                     <div className="flex justify-between">
-                                        <span className="text-gray-600">Total:</span>
+                                        <span className="text-gray-600">Загалом:</span>
                                         <span className="font-bold text-lg">
                                             ${selectedOrder.order.totalPrice}
                                         </span>
@@ -95,11 +95,11 @@ const OrdersPage = () => {
                         </div>
                     </div>
 
-                    {/* Order Items */}
+                    {/* Товари замовлення */}
                     <div className="lg:col-span-2">
                         <div className="card bg-base-100 shadow-lg">
                             <div className="card-body">
-                                <h2 className="card-title">Order Items</h2>
+                                <h2 className="card-title">Товари замовлення</h2>
 
                                 <div className="space-y-4">
                                     {selectedOrder.items.map((item) => (
@@ -107,7 +107,7 @@ const OrdersPage = () => {
                                             <div className="flex-1">
                                                 <h3 className="font-semibold">{item.name}</h3>
                                                 <p className="text-sm text-gray-600">
-                                                    Quantity: {item.quantity}
+                                                    Кількість: {item.quantity}
                                                 </p>
                                             </div>
                                             <div className="text-right">
@@ -115,7 +115,7 @@ const OrdersPage = () => {
                                                     ${(item.itemPrice * item.quantity).toFixed(2)}
                                                 </p>
                                                 <p className="text-sm text-gray-600">
-                                                    ${item.itemPrice} each
+                                                    ${item.itemPrice} за штуку
                                                 </p>
                                             </div>
                                         </div>
@@ -131,17 +131,17 @@ const OrdersPage = () => {
 
     return (
         <div className="container mx-auto px-4 py-8">
-            <h1 className="text-3xl font-bold mb-6">My Orders</h1>
+            <h1 className="text-3xl font-bold mb-6">Мої замовлення</h1>
 
             {orders.length === 0 ? (
                 <div className="text-center py-12">
                     <Package className="w-24 h-24 text-gray-300 mx-auto mb-4" />
-                    <h2 className="text-2xl font-bold mb-2">No orders yet</h2>
+                    <h2 className="text-2xl font-bold mb-2">Замовлень поки що немає</h2>
                     <p className="text-gray-600 mb-6">
-                        You haven't placed any orders. Start shopping to see your orders here!
+                        Ви ще не зробили жодного замовлення. Почніть робити покупки, щоб побачити свої замовлення тут!
                     </p>
                     <a href="/" className="btn btn-primary">
-                        Start Shopping
+                        Почати покупки
                     </a>
                 </div>
             ) : (
@@ -153,7 +153,7 @@ const OrdersPage = () => {
                                     <div className="flex-1">
                                         <h2 className="card-title">
                                             <Package className="w-5 h-5" />
-                                            Order #{order.id}
+                                            Замовлення #{order.id}
                                         </h2>
 
                                         <div className="flex items-center gap-4 mt-2 text-sm text-gray-600">
@@ -177,7 +177,7 @@ const OrdersPage = () => {
                                             onClick={() => handleViewOrder(order.id)}
                                         >
                                             <Eye className="w-4 h-4" />
-                                            View Details
+                                            Переглянути деталі
                                         </button>
                                     </div>
                                 </div>

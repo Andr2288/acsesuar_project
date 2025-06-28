@@ -1,14 +1,14 @@
 import { ChevronLeft, ChevronRight, ChevronsLeft, ChevronsRight } from "lucide-react";
 
 const Pagination = ({
-    currentPage,
-    totalPages,
-    totalItems,
-    itemsPerPage,
-    onPageChange,
-    onItemsPerPageChange,
-    className = ""
-}) => {
+                        currentPage,
+                        totalPages,
+                        totalItems,
+                        itemsPerPage,
+                        onPageChange,
+                        onItemsPerPageChange,
+                        className = ""
+                    }) => {
     // Якщо тільки одна сторінка, не показуємо пагінацію
     if (totalPages <= 1) return null;
 

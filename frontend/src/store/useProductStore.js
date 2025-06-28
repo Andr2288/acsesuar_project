@@ -16,8 +16,8 @@ export const useProductStore = create((set, get) => ({
             const res = await axiosInstance.get("/products");
             set({ products: res.data });
         } catch (error) {
-            toast.error("Failed to fetch products");
-            console.error("Error fetching products:", error);
+            toast.error("Не вдалося завантажити товари");
+            console.error("Помилка завантаження товарів:", error);
         } finally {
             set({ isLoading: false });
         }
@@ -29,8 +29,8 @@ export const useProductStore = create((set, get) => ({
             const res = await axiosInstance.get(`/products/${id}`);
             set({ selectedProduct: res.data });
         } catch (error) {
-            toast.error("Failed to fetch product");
-            console.error("Error fetching product:", error);
+            toast.error("Не вдалося завантажити товар");
+            console.error("Помилка завантаження товару:", error);
         } finally {
             set({ isLoading: false });
         }
@@ -55,11 +55,11 @@ export const useProductStore = create((set, get) => ({
                 },
             });
 
-            toast.success("Product created successfully!");
-            get().fetchProducts(); // Refresh products list
+            toast.success("Товар створено успішно!");
+            get().fetchProducts(); // Оновлюємо список товарів
             return true;
         } catch (error) {
-            toast.error(error.response?.data?.message || "Failed to create product");
+            toast.error(error.response?.data?.message || "Не вдалося створити товар");
             return false;
         } finally {
             set({ isCreating: false });
@@ -85,11 +85,11 @@ export const useProductStore = create((set, get) => ({
                 },
             });
 
-            toast.success("Product updated successfully!");
-            get().fetchProducts(); // Refresh products list
+            toast.success("Товар оновлено успішно!");
+            get().fetchProducts(); // Оновлюємо список товарів
             return true;
         } catch (error) {
-            toast.error(error.response?.data?.message || "Failed to update product");
+            toast.error(error.response?.data?.message || "Не вдалося оновити товар");
             return false;
         } finally {
             set({ isUpdating: false });
@@ -100,11 +100,11 @@ export const useProductStore = create((set, get) => ({
         set({ isDeleting: true });
         try {
             await axiosInstance.delete(`/products/${id}`);
-            toast.success("Product deleted successfully!");
-            get().fetchProducts(); // Refresh products list
+            toast.success("Товар видалено успішно!");
+            get().fetchProducts(); // Оновлюємо список товарів
             return true;
         } catch (error) {
-            toast.error(error.response?.data?.message || "Failed to delete product");
+            toast.error(error.response?.data?.message || "Не вдалося видалити товар");
             return false;
         } finally {
             set({ isDeleting: false });

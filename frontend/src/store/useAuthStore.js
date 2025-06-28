@@ -18,7 +18,7 @@ export const useAuthStore = create((set, get) => ({
             toast.success("Акаунт створено успішно!");
             return true;
         } catch (error) {
-            console.error("Signup error:", error);
+            console.error("Помилка реєстрації:", error);
             const errorMessage = error.response?.data?.message || "Помилка реєстрації";
             toast.error(errorMessage);
             return false;
@@ -35,17 +35,17 @@ export const useAuthStore = create((set, get) => ({
                 password,
             });
 
-            // Save token
+            // Зберігаємо токен
             localStorage.setItem('token', res.data.token);
 
-            // Get user profile
+            // Отримуємо профіль користувача
             const profileRes = await axiosInstance.get("/users/profile");
             set({ authUser: profileRes.data });
 
             toast.success("Успішний вхід в систему!");
             return true;
         } catch (error) {
-            console.error("Login error:", error);
+            console.error("Помилка входу:", error);
 
             // Детальніша обробка помилок
             let errorMessage = "Помилка входу в систему";
@@ -84,7 +84,7 @@ export const useAuthStore = create((set, get) => ({
             const res = await axiosInstance.get("/users/profile");
             set({ authUser: res.data });
         } catch (error) {
-            console.log("Error in checkAuth:", error);
+            console.log("Помилка при перевірці авторизації:", error);
             localStorage.removeItem('token');
             set({ authUser: null });
         } finally {
@@ -100,14 +100,14 @@ export const useAuthStore = create((set, get) => ({
 
             await axiosInstance.patch("/users/update", updateData);
 
-            // Refresh profile
+            // Оновлюємо профіль
             const res = await axiosInstance.get("/users/profile");
             set({ authUser: res.data });
 
             toast.success("Профіль оновлено успішно!");
             return true;
         } catch (error) {
-            console.error("Update profile error:", error);
+            console.error("Помилка оновлення профілю:", error);
             const errorMessage = error.response?.data?.message || "Помилка оновлення профілю";
             toast.error(errorMessage);
             return false;

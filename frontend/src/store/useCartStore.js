@@ -13,8 +13,8 @@ export const useCartStore = create((set, get) => ({
             const res = await axiosInstance.get("/cart");
             set({ cart: res.data });
         } catch (error) {
-            toast.error("Failed to fetch cart");
-            console.error("Error fetching cart:", error);
+            toast.error("Не вдалося завантажити кошик");
+            console.error("Помилка завантаження кошика:", error);
         } finally {
             set({ isLoading: false });
         }
@@ -28,11 +28,11 @@ export const useCartStore = create((set, get) => ({
                 quantity,
             });
 
-            toast.success("Added to cart!");
-            get().fetchCart(); // Refresh cart
+            toast.success("Додано до кошика!");
+            get().fetchCart(); // Оновлюємо кошик
             return true;
         } catch (error) {
-            toast.error(error.response?.data?.message || "Failed to add to cart");
+            toast.error(error.response?.data?.message || "Не вдалося додати до кошика");
             return false;
         } finally {
             set({ isUpdating: false });
@@ -43,11 +43,11 @@ export const useCartStore = create((set, get) => ({
         set({ isUpdating: true });
         try {
             await axiosInstance.delete(`/cart/remove/${productId}`);
-            toast.success("Removed from cart!");
-            get().fetchCart(); // Refresh cart
+            toast.success("Видалено з кошика!");
+            get().fetchCart(); // Оновлюємо кошик
             return true;
         } catch (error) {
-            toast.error(error.response?.data?.message || "Failed to remove from cart");
+            toast.error(error.response?.data?.message || "Не вдалося видалити з кошика");
             return false;
         } finally {
             set({ isUpdating: false });
@@ -66,10 +66,10 @@ export const useCartStore = create((set, get) => ({
                 quantity,
             });
 
-            get().fetchCart(); // Refresh cart
+            get().fetchCart(); // Оновлюємо кошик
             return true;
         } catch (error) {
-            toast.error("Failed to update cart");
+            toast.error("Не вдалося оновити кошик");
             return false;
         } finally {
             set({ isUpdating: false });

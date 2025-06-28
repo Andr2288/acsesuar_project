@@ -36,14 +36,14 @@ const LoginPage = () => {
             <div className="card w-full max-w-md shadow-xl bg-base-100">
                 <div className="card-body">
                     <h2 className="card-title text-2xl font-bold text-center mb-6">
-                        Welcome Back!
+                        Ласкаво просимо!
                     </h2>
 
                     <form onSubmit={handleSubmit} className="space-y-4">
-                        {/* Login Input */}
+                        {/* Поле логіну */}
                         <div className="form-control">
                             <label className="label">
-                                <span className="label-text">Username</span>
+                                <span className="label-text">Ім'я користувача</span>
                             </label>
                             <div className="relative">
                                 <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
@@ -52,7 +52,7 @@ const LoginPage = () => {
                                 <input
                                     type="text"
                                     name="login"
-                                    placeholder="Enter your username"
+                                    placeholder="Введіть ваше ім'я користувача"
                                     className="input input-bordered w-full pl-10"
                                     value={formData.login}
                                     onChange={handleInputChange}
@@ -61,10 +61,10 @@ const LoginPage = () => {
                             </div>
                         </div>
 
-                        {/* Password Input */}
+                        {/* Поле пароля */}
                         <div className="form-control">
                             <label className="label">
-                                <span className="label-text">Password</span>
+                                <span className="label-text">Пароль</span>
                             </label>
                             <div className="relative">
                                 <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
@@ -73,7 +73,7 @@ const LoginPage = () => {
                                 <input
                                     type={showPassword ? "text" : "password"}
                                     name="password"
-                                    placeholder="Enter your password"
+                                    placeholder="Введіть ваш пароль"
                                     className="input input-bordered w-full pl-10 pr-10"
                                     value={formData.password}
                                     onChange={handleInputChange}
@@ -102,19 +102,19 @@ const LoginPage = () => {
                                 {isLoggingIn ? (
                                     <span className="loading loading-spinner loading-sm"></span>
                                 ) : (
-                                    "Login"
+                                    "Увійти"
                                 )}
                             </button>
                         </div>
                     </form>
 
-                    <div className="divider">OR</div>
+                    <div className="divider">АБО</div>
 
                     <div className="text-center">
                         <p className="text-sm">
-                            Don't have an account?{" "}
+                            Ще немає акаунту?{" "}
                             <Link to="/signup" className="link link-primary">
-                                Sign up here
+                                Зареєструйтеся тут
                             </Link>
                         </p>
                     </div>

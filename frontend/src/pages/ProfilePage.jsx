@@ -54,7 +54,7 @@ const ProfilePage = () => {
                     <div className="flex items-center justify-between mb-6">
                         <h1 className="card-title text-2xl">
                             <User className="w-6 h-6" />
-                            Profile Settings
+                            Налаштування профілю
                         </h1>
 
                         {!isEditing && (
@@ -63,17 +63,17 @@ const ProfilePage = () => {
                                 onClick={() => setIsEditing(true)}
                             >
                                 <Edit3 className="w-4 h-4" />
-                                Edit
+                                Редагувати
                             </button>
                         )}
                     </div>
 
                     {isEditing ? (
                         <form onSubmit={handleSubmit} className="space-y-6">
-                            {/* Username Field */}
+                            {/* Поле імені користувача */}
                             <div className="form-control">
                                 <label className="label">
-                                    <span className="label-text font-semibold">Username</span>
+                                    <span className="label-text font-semibold">Ім'я користувача</span>
                                 </label>
                                 <input
                                     type="text"
@@ -85,12 +85,12 @@ const ProfilePage = () => {
                                 />
                             </div>
 
-                            {/* Password Field */}
+                            {/* Поле пароля */}
                             <div className="form-control">
                                 <label className="label">
-                                    <span className="label-text font-semibold">New Password</span>
+                                    <span className="label-text font-semibold">Новий пароль</span>
                                     <span className="label-text-alt text-gray-500">
-                                        Leave empty to keep current password
+                                        Залиште порожнім, щоб зберегти поточний пароль
                                     </span>
                                 </label>
                                 <div className="relative">
@@ -100,7 +100,7 @@ const ProfilePage = () => {
                                         className="input input-bordered w-full pr-10"
                                         value={formData.password}
                                         onChange={handleInputChange}
-                                        placeholder="Enter new password"
+                                        placeholder="Введіть новий пароль"
                                     />
                                     <button
                                         type="button"
@@ -116,7 +116,7 @@ const ProfilePage = () => {
                                 </div>
                             </div>
 
-                            {/* Action Buttons */}
+                            {/* Кнопки дій */}
                             <div className="flex gap-3 justify-end">
                                 <button
                                     type="button"
@@ -124,33 +124,33 @@ const ProfilePage = () => {
                                     onClick={handleCancel}
                                 >
                                     <X className="w-4 h-4" />
-                                    Cancel
+                                    Скасувати
                                 </button>
                                 <button
                                     type="submit"
                                     className="btn btn-primary"
                                 >
                                     <Save className="w-4 h-4" />
-                                    Save Changes
+                                    Зберегти зміни
                                 </button>
                             </div>
                         </form>
                     ) : (
                         <div className="space-y-6">
-                            {/* Username Display */}
+                            {/* Відображення імені користувача */}
                             <div className="form-control">
                                 <label className="label">
-                                    <span className="label-text font-semibold">Username</span>
+                                    <span className="label-text font-semibold">Ім'я користувача</span>
                                 </label>
                                 <div className="input input-bordered bg-gray-50 cursor-not-allowed">
                                     {authUser?.login}
                                 </div>
                             </div>
 
-                            {/* Role Display */}
+                            {/* Відображення ролі */}
                             <div className="form-control">
                                 <label className="label">
-                                    <span className="label-text font-semibold">Role</span>
+                                    <span className="label-text font-semibold">Роль</span>
                                 </label>
                                 <div className="input input-bordered bg-gray-50 cursor-not-allowed">
                                     <div className="flex items-center justify-between">
@@ -158,23 +158,23 @@ const ProfilePage = () => {
                                         <div className={`badge ${
                                             authUser?.role === 'admin' ? 'badge-primary' : 'badge-secondary'
                                         }`}>
-                                            {authUser?.role === 'admin' ? 'Administrator' : 'User'}
+                                            {authUser?.role === 'admin' ? 'Адміністратор' : 'Користувач'}
                                         </div>
                                     </div>
                                 </div>
                             </div>
 
-                            {/* Account Info */}
+                            {/* Інформація про акаунт */}
                             <div className="bg-base-200 rounded-lg p-4">
-                                <h3 className="font-semibold mb-2">Account Information</h3>
+                                <h3 className="font-semibold mb-2">Інформація про акаунт</h3>
                                 <p className="text-sm text-gray-600">
-                                    Your account is active and ready to use. You can update your username and password at any time.
+                                    Ваш акаунт активний та готовий до використання. Ви можете оновити своє ім'я користувача та пароль в будь-який час.
                                 </p>
                                 {authUser?.role === 'admin' && (
                                     <div className="alert alert-info mt-3">
                                         <div>
                                             <span className="text-sm">
-                                                You have administrator privileges and can manage products and other administrative tasks.
+                                                У вас є права адміністратора, і ви можете управляти товарами та виконувати інші адміністративні завдання.
                                             </span>
                                         </div>
                                     </div>

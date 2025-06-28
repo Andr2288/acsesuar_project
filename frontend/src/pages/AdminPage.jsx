@@ -96,7 +96,7 @@ const AdminPage = () => {
                 category: product.category || "",
                 image: null,
             });
-            // Set current image as preview if exists
+            // Встановлюємо поточне зображення як превью, якщо воно існує
             if (product.imagePath) {
                 setImagePreview(`http://localhost:5000/${product.imagePath}`);
             }
@@ -120,7 +120,7 @@ const AdminPage = () => {
         const file = e.target.files[0];
         setFormData({ ...formData, image: file });
 
-        // Create preview
+        // Створюємо превью
         if (file) {
             const reader = new FileReader();
             reader.onloadend = () => {
@@ -392,7 +392,7 @@ const AdminPage = () => {
                 </div>
             )}
 
-            {/* Покращене модальне вікно (залишається без змін) */}
+            {/* Покращене модальне вікно */}
             {showModal && (
                 <div className="modal modal-open">
                     <div className="modal-box w-11/12 max-w-3xl max-h-[90vh] overflow-y-auto">
@@ -430,7 +430,7 @@ const AdminPage = () => {
                                             {imagePreview ? (
                                                 <img
                                                     src={imagePreview}
-                                                    alt="Preview"
+                                                    alt="Прев'ю"
                                                     className="w-full h-full object-cover"
                                                 />
                                             ) : (
