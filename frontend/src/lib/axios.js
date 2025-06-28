@@ -23,10 +23,22 @@ axiosInstance.interceptors.request.use(
 axiosInstance.interceptors.response.use(
     (response) => response,
     (error) => {
-        if (error.response?.status === 401) {
+        // Перевіряємо, чи це не запит на логін або реєстрацію
+        const isAuthRequest = error.config?.url?.includes('/users/login') ||
+            error.config?.url?.includes('/users/register');
+
+        // Перенаправляємо тільки якщо:
+        // 1. Це 401 помилка
+        // 2. Це НЕ запит на авторизацію
+        // 3. Користувач не на сторінці логіну
+        if (error.response?.status === 401 &&
+            !isAuthRequest &&
+            !window.location.pathname.includes('/login')) {
+
             localStorage.removeItem('token');
             window.location.href = '/login';
         }
+
         return Promise.reject(error);
     }
 );

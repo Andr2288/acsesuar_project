@@ -15,10 +15,12 @@ export const useAuthStore = create((set, get) => ({
                 login,
                 password,
             });
-            toast.success("Account created successfully!");
+            toast.success("Акаунт створено успішно!");
             return true;
         } catch (error) {
-            toast.error(error.response?.data?.message || "Signup failed");
+            console.error("Signup error:", error);
+            const errorMessage = error.response?.data?.message || "Помилка реєстрації";
+            toast.error(errorMessage);
             return false;
         } finally {
             set({ isSigningUp: false });
@@ -40,10 +42,25 @@ export const useAuthStore = create((set, get) => ({
             const profileRes = await axiosInstance.get("/users/profile");
             set({ authUser: profileRes.data });
 
-            toast.success("Login successful!");
+            toast.success("Успішний вхід в систему!");
             return true;
         } catch (error) {
-            toast.error(error.response?.data?.message || "Login failed");
+            console.error("Login error:", error);
+
+            // Детальніша обробка помилок
+            let errorMessage = "Помилка входу в систему";
+
+            if (error.response?.status === 401) {
+                errorMessage = "Невірний логін або пароль";
+            } else if (error.response?.status === 400) {
+                errorMessage = "Необхідно ввести логін та пароль";
+            } else if (error.response?.data?.message) {
+                errorMessage = error.response.data.message;
+            } else if (error.message) {
+                errorMessage = `Помилка мережі: ${error.message}`;
+            }
+
+            toast.error(errorMessage);
             return false;
         } finally {
             set({ isLoggingIn: false });
@@ -53,7 +70,7 @@ export const useAuthStore = create((set, get) => ({
     logout: () => {
         localStorage.removeItem('token');
         set({ authUser: null });
-        toast.success("Logged out successfully");
+        toast.success("Вихід виконано успішно");
     },
 
     checkAuth: async () => {
@@ -87,10 +104,12 @@ export const useAuthStore = create((set, get) => ({
             const res = await axiosInstance.get("/users/profile");
             set({ authUser: res.data });
 
-            toast.success("Profile updated successfully!");
+            toast.success("Профіль оновлено успішно!");
             return true;
         } catch (error) {
-            toast.error(error.response?.data?.message || "Update failed");
+            console.error("Update profile error:", error);
+            const errorMessage = error.response?.data?.message || "Помилка оновлення профілю";
+            toast.error(errorMessage);
             return false;
         }
     },
