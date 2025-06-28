@@ -3,6 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { Minus, Plus, Trash2, ShoppingBag, ArrowLeft } from "lucide-react";
 import { useCartStore } from "../store/useCartStore.js";
 import { useOrderStore } from "../store/useOrderStore.js";
+import toast from "react-hot-toast";
 
 const CartPage = () => {
     const {
@@ -38,15 +39,18 @@ const CartPage = () => {
                 return;
             }
 
-            // Then create Stripe checkout session
-            const sessionId = await createCheckoutSession(orderId);
-            if (sessionId) {
-                // Redirect to Stripe Checkout
-                const stripe = window.Stripe(process.env.REACT_APP_STRIPE_PUBLIC_KEY);
-                stripe.redirectToCheckout({ sessionId });
+            // Process payment (simplified version)
+            const paymentSuccess = await createCheckoutSession(orderId);
+            if (paymentSuccess) {
+                toast.success("Order completed successfully!");
+                // Clear cart by fetching it again (it should be empty after order creation)
+                await fetchCart();
+                // Redirect to orders page
+                navigate("/orders");
             }
         } catch (error) {
             console.error("Checkout error:", error);
+            toast.error("Checkout failed. Please try again.");
         }
     };
 
@@ -196,7 +200,7 @@ const CartPage = () => {
                                     {isCreating ? (
                                         <span className="loading loading-spinner loading-sm"></span>
                                     ) : (
-                                        "Proceed to Checkout"
+                                        "Complete Order"
                                     )}
                                 </button>
                             </div>

@@ -49,15 +49,23 @@ export const useOrderStore = create((set, get) => ({
         }
     },
 
+    // Updated for simple payment processing (no Stripe)
     createCheckoutSession: async (orderId) => {
         try {
             const res = await axiosInstance.post("/pay/create-checkout-session", {
                 orderId,
             });
-            return res.data.id; // Stripe session ID
+
+            if (res.data.success) {
+                toast.success("Payment processed successfully!");
+                get().fetchOrders(); // Refresh orders
+                return true;
+            }
+
+            return false;
         } catch (error) {
-            toast.error("Failed to create payment session");
-            return null;
+            toast.error("Failed to process payment");
+            return false;
         }
     },
 }));

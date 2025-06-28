@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { Search, Filter, ShoppingCart } from "lucide-react";
+import toast from "react-hot-toast"; // Fixed: Added missing import
 import { useProductStore } from "../store/useProductStore.js";
 import { useCartStore } from "../store/useCartStore.js";
 import { useAuthStore } from "../store/useAuthStore.js";
